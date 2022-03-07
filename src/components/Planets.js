@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export const People = () => {
+export const Planets = () => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const url = "https://swapi.dev/api/people/";
+  const url = "https://swapi.dev/api/planets/";
 
   useEffect(() => {
     axios
@@ -34,13 +34,13 @@ export const People = () => {
       return (
         <div key={i++}>
           <h4>{res.name}</h4>
-          <p>Gender: {res.gender}</p>
-          <p>Hair color: {res.hair_color}</p>
-          <p>Eye color: {res.eye_color}</p>
-          <p>Height: {res.height}</p>
+          <p>Rotation period: {res.rotation_period}</p>
+          <p>Climate: {res.climate}</p>
+          <p>Terrain: {res.terrain}</p>
+          <p>Population: {res.population}</p>
           <ul>
-            {res.films.map((film, i) => {
-              return <li key={i}>{film}</li>;
+            {res.residents.map((resident, i) => {
+              return <li key={i}>{resident}</li>;
             })}
           </ul>
         </div>

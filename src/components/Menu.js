@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
 export const Menu = () => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
@@ -18,12 +20,11 @@ export const Menu = () => {
       });
   }, [url]);
 
-  console.log("fetchData => " + fetchData);
   let arr = [];
 
   const iterate = () => {
-    for (const [key, value] of Object.entries(fetchData)) {
-      arr.push(key, value);
+    for (const [key] of Object.entries(fetchData)) {
+      arr.push(key);
     }
   };
 
@@ -34,14 +35,10 @@ export const Menu = () => {
     return (
       <>
         <div key={i++}>
-          <a href={'"' + fetchData.people + '"'}>
-            <h4>People</h4>
-          </a>
+          <Link to="/people">People</Link>
         </div>
         <div key={i++}>
-          <a href={'"' + fetchData.Planets + '"'}>
-            <h4>Planets</h4>
-          </a>
+          <Link to="/planets">Planets</Link>
         </div>
       </>
     );
