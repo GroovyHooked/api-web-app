@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Resident } from "./Resident";
 import axios from "axios";
 
 export const Planets = () => {
@@ -29,7 +31,7 @@ export const Planets = () => {
     });
 
     console.log(fetchData.results);
-    let i = 0;
+    let i = 1;
     return fetchData.results.map((res) => {
       return (
         <div key={i++}>
@@ -38,11 +40,20 @@ export const Planets = () => {
           <p>Climate: {res.climate}</p>
           <p>Terrain: {res.terrain}</p>
           <p>Population: {res.population}</p>
-          <ul>
-            {res.residents.map((resident, i) => {
-              return <li key={i}>{resident}</li>;
-            })}
-          </ul>
+          <div>
+            <h5>Résidents:</h5>
+            <ul>
+              {res.residents.map((resident, i) => {
+                return (
+                  <li>
+                    <Link to={"/resident/" + i} children={<Resident id={i} />}>
+                      {resident}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       );
     });
