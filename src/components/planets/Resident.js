@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export const People = () => {
+export const Resident = ({ id }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
   const url = "https://swapi.dev/api/people/";
 
   useEffect(() => {
+    console.log(`${url}${id}`)
     axios
-      .get(url)
+      .get(`${url}${id}`)
       .then((resp) => {
         setFetchData(resp.data);
         setIsLoaded(true);
@@ -17,7 +18,7 @@ export const People = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [url]);
+  }, []);
 
   if (isLoaded) {
     fetchData.results.map((res) => {
@@ -29,23 +30,32 @@ export const People = () => {
     });
 
     console.log(fetchData.results);
-    let i = 0;
-    return fetchData.results.map((res) => {
-      return (
-        <div key={i++}>
-          <h4>{res.name}</h4>
-          <p>Gender: {res.gender}</p>
-          <p>Hair color: {res.hair_color}</p>
-          <p>Eye color: {res.eye_color}</p>
-          <p>Height: {res.height}</p>
+
+    return (
+      <div>
+        <h4>{fetchData.name}</h4>
+        <p>height: {fetchData.height}</p>
+        <p>mass: {fetchData.mass}</p>
+        <p>hair_color: {fetchData.hair_color}</p>
+        <p>skin_color: {fetchData.skin_color}</p>
+        <div>
+          <h5>films:</h5>
           <ul>
-            {res.films.map((film, i) => {
+            {fetchData.films.map((film, i) => {
               return <li key={i}>{film}</li>;
             })}
           </ul>
         </div>
-      );
-    });
+        <div>
+          <h5>films:</h5>
+          <ul>
+            {fetchData.vehicles.map((vehicle, i) => {
+              return <li key={i}>{vehicle}</li>;
+            })}
+          </ul>
+        </div>
+      </div>
+    );
   } else {
     return <div>Waiting...</div>;
   }

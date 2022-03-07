@@ -18,7 +18,7 @@ export const Menu = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [url]);
+  }, []);
 
   let arr = [];
 
@@ -29,17 +29,17 @@ export const Menu = () => {
   };
 
   iterate();
-
+console.log(arr)
   let i = 0;
   if (isLoaded) {
     return (
-      <>
-        <div key={i++}>
-          <Link to="/people">People</Link>
-        </div>
-        <div key={i++}>
-          <Link to="/planets">Planets</Link>
-        </div>
+    <>
+      {arr.map((cat) => {
+        return (<><div key={i++}>
+          <Link to={cat}>{cat}</Link>
+        </div></>)
+      })}
+        
       </>
     );
   } else {
