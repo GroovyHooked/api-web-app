@@ -1,46 +1,47 @@
 import React, { useState, useEffect } from "react";
-
+import axios from "axios";
 export const Menu = () => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
   const url = "https://swapi.dev/api/";
-  let arr = [];
 
   useEffect(() => {
-    fetch(url)
-      .then((resp) => resp.json())
-      .then(function (data) {
-        console.log("data => " + data);
-        for (const [key, value] of Object.entries(data)) {
-          // eslint-disable-next-line no-useless-concat
-          arr.push(["name" + ":" + key + "," + "url" + ":" + value]);
-        }
-        setFetchData(data);
-
+    axios
+      .get(url)
+      .then((resp) => {
+        setFetchData(resp.data);
         setIsLoaded(true);
       })
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [url]);
 
-  console.log("arr => " + arr);
-  console.log("fetchData => " + Object.entries(fetchData));
+  console.log("fetchData => " + fetchData);
+  let arr = [];
+
   const iterate = () => {
     for (const [key, value] of Object.entries(fetchData)) {
-      return (
-        <p>
-          {key}: {value}
-        </p>
-      );
+      arr.push(key, value);
     }
   };
 
-  return <div id="myId">{isLoaded ? iterate() : null}</div>;
-};
+  iterate();
 
-/*
-const getKey = (object) => {
-    return Object.keys(object);
-  };*/
+  if (isLoaded) {
+    return arr.map((cat, i) => {
+      console.log(cat);
+      return (
+        <div key={i}>
+          <p>{cat}</p>
+          <p>
+            <a href={'"' + cat.i + '"'}>{cat.i}</a>
+          </p>
+        </div>
+      );
+    });
+  } else {
+    return <div>Waiting</div>;
+  }
+};
