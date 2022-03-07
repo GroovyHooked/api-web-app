@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Resident } from "./Resident";
+import { PlanetsResident } from "./PlanetsResident";
 import axios from "axios";
 
 export const Planets = () => {
@@ -22,15 +22,7 @@ export const Planets = () => {
   }, []);
 
   if (isLoaded) {
-    fetchData.results.map((res) => {
-      return console.log(
-        res.films.map((f) => {
-          return console.log(f);
-        })
-      );
-    });
-
-    console.log(fetchData.results);
+    
     let i = 1;
     return fetchData.results.map((res) => {
       return (
@@ -46,7 +38,7 @@ export const Planets = () => {
               {res.residents.map((resident, i) => {
                 return (
                   <li>
-                    <Link to={"/resident/" + i} children={<Resident id={i} />}>
+                    <Link to={"/resident/" + i} children={<PlanetsResident key={i} resident={i} />}>
                       {resident}
                     </Link>
                   </li>

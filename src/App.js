@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { People } from "./components/people/People";
 import { Navbar } from "./components/Navbar";
 import { Planets } from "./components/planets/Planets";
-import { Resident } from "./components/planets/Resident";
+import { PlanetsResident } from "./components/planets/PlanetsResident";
 import { Films } from "./components/films/Films";
 import { Species } from "./components/species/Species";
 import "./App.css";
@@ -17,7 +17,7 @@ function App() {
 
         <Route path="/people" element={<People />} />
         <Route path="/planets" element={<Planets />} />
-        <Route path="/resident/:id" element={<Resident />} />
+        <Route path="/resident/:id" element={<PlanetsResident />} />
         <Route path="/films" element={<Films />} />
         <Route path="/species" element={<Species />} />
       </Routes>

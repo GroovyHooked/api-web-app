@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export const Resident = ({ id }) => {
+export const PlanetsResident = ({ resident }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-
+console.log(resident)
   const url = "https://swapi.dev/api/people/";
 
   useEffect(() => {
-    console.log(`${url}${id}`)
+    //console.log(`${url}`)
     axios
-      .get(`${url}${id}`)
+      .get(`${url}`)
       .then((resp) => {
         setFetchData(resp.data);
         setIsLoaded(true);
@@ -21,19 +21,20 @@ export const Resident = ({ id }) => {
   }, []);
 
   if (isLoaded) {
-    fetchData.results.map((res) => {
-      return console.log(
-        res.films.map((f) => {
-          return console.log(f);
-        })
-      );
-    });
+    // fetchData.results.map((res) => {
+    //   return console.log(
+    //     res.films.map((f) => {
+    //       return console.log(f);
+    //     })
+    //   );
+    // });
 
-    console.log(fetchData.results);
+    // console.log(fetchData.results);
 
     return (
       <div>
-        <h4>{fetchData.name}</h4>
+        <p>Coucou</p>
+        {/*<h4>{fetchData.name}</h4>
         <p>height: {fetchData.height}</p>
         <p>mass: {fetchData.mass}</p>
         <p>hair_color: {fetchData.hair_color}</p>
@@ -53,7 +54,7 @@ export const Resident = ({ id }) => {
               return <li key={i}>{vehicle}</li>;
             })}
           </ul>
-        </div>
+          </div>*/}
       </div>
     );
   } else {

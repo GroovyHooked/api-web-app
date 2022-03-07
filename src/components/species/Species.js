@@ -22,15 +22,6 @@ export const Species = () => {
   }, []);
 
   if (isLoaded) {
-    fetchData.results.map((res) => {
-      return console.log(
-        res.films.map((f) => {
-          return console.log(f);
-        })
-      );
-    });
-
-    console.log(fetchData.results);
     let i = 1;
     return fetchData.results.map((res) => {
       return (
