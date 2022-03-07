@@ -29,18 +29,22 @@ export const Menu = () => {
 
   iterate();
 
+  let i = 0;
   if (isLoaded) {
-    return arr.map((cat, i) => {
-      console.log(cat);
-      return (
-        <div key={i}>
-          <p>{cat}</p>
-          <p>
-            <a href={'"' + cat.i + '"'}>{cat.i}</a>
-          </p>
+    return (
+      <>
+        <div key={i++}>
+          <a href={'"' + fetchData.people + '"'}>
+            <h4>People</h4>
+          </a>
         </div>
-      );
-    });
+        <div key={i++}>
+          <a href={'"' + fetchData.Planets + '"'}>
+            <h4>Planets</h4>
+          </a>
+        </div>
+      </>
+    );
   } else {
     return <div>Waiting</div>;
   }
