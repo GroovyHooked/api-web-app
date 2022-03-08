@@ -29,17 +29,23 @@ export const Menu = () => {
   };
 
   iterate();
-console.log(arr)
+  console.log(arr);
   let i = 0;
+  let y = 100;
   if (isLoaded) {
     return (
-    <>
-      {arr.map((cat) => {
-        return (<><div key={i++}>
-          <Link to={cat}>{cat}</Link>
-        </div></>)
-      })}
-        
+      <>
+        {arr.map((cat) => {
+          return (
+            <>
+              <div key={i++}>
+                <Link key={y++} to={cat}>
+                  {cat}
+                </Link>
+              </div>
+            </>
+          );
+        })}
       </>
     );
   } else {

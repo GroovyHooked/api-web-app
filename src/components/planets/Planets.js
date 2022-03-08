@@ -6,25 +6,41 @@ import axios from "axios";
 export const Planets = () => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
+  const [fetchData1, setFetchData1] = useState({});
+  const [isLoaded1, setIsLoaded1] = useState(false);
 
   const url = "https://swapi.dev/api/planets/";
+  const peopleUrl = "https://swapi.dev/api/people/";
 
-  useEffect(() => {
-    axios
-      .get(url)
-      .then((resp) => {
-        setFetchData(resp.data);
-        setIsLoaded(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
+  axios.all(
+    useEffect(() => {
+      axios
+        .get(url)
+        .then((resp) => {
+          setFetchData(resp.data);
+          setIsLoaded(true);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, []),
 
-  if (isLoaded) {
-    
-    let i = 1;
-    return fetchData.results.map((res) => {
+    useEffect(() => {
+      axios
+        .get(peopleUrl)
+        .then((resp) => {
+          setFetchData1(resp.data);
+          setIsLoaded1(true);
+          console.log(resp.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }, [])
+  );
+
+  if (isLoaded && isLoaded1) {
+    return fetchData.results.map((res, i) => {
       return (
         <div key={i++}>
           <h4>{res.name}</h4>
@@ -35,12 +51,11 @@ export const Planets = () => {
           <div>
             <h5>Résidents:</h5>
             <ul>
-              {res.residents.map((resident, i) => {
+              {fetchData1.results.map((res, i) => {
                 return (
-                  <li>
-                    <Link to={"/resident/" + i} children={<PlanetsResident key={i} resident={i} />}>
-                      {resident}
-                    </Link>
+                  <li key={i}>
+                    <a href={"/resident/" + (i + 1)}>{res.name}</a>
+                    {res.name}
                   </li>
                 );
               })}

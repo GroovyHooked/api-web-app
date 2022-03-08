@@ -7,7 +7,10 @@ import { PlanetsResident } from "./components/planets/PlanetsResident";
 import { Films } from "./components/films/Films";
 import { Species } from "./components/species/Species";
 import "./App.css";
-
+let foo = window.location.href;
+console.log("foo: " + foo);
+let bar = foo.split("/");
+console.log("bar : " + bar);
 function App() {
   return (
     <div className="App">
