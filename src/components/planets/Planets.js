@@ -5,39 +5,56 @@ import axios from "axios";
 
 export const Planets = () => {
   const [fetchData, setFetchData] = useState({});
-  const [isLoaded, setIsLoaded] = useState(false);
   const [fetchData1, setFetchData1] = useState({});
+  const [fetchData2, setFetchData2] = useState({});
+  const [urlRecover, setUrlRecover] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
   const [isLoaded1, setIsLoaded1] = useState(false);
 
   const url = "https://swapi.dev/api/planets/";
   const peopleUrl = "https://swapi.dev/api/people/";
 
-  axios.all(
-    useEffect(() => {
-      axios
-        .get(url)
-        .then((resp) => {
-          setFetchData(resp.data);
-          setIsLoaded(true);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }, []),
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((resp) => {
+        setFetchData(resp.data);
+        console.log("fetchData1 => ", fetchData1);
+        setIsLoaded(true);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
-    useEffect(() => {
-      axios
-        .get(peopleUrl)
-        .then((resp) => {
-          setFetchData1(resp.data);
-          setIsLoaded1(true);
-          console.log(resp.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }, [])
-  );
+    axios
+      .get(url)
+      .then((resp) => {
+        setFetchData1(resp.data);
+        console.log("fetchData1 => ", fetchData1);
+        resp.data.results.forEach(
+          (e) =>
+            setUrlRecover(urlRecover.push(e.residents)) &&
+            console.log(e.residents)
+        );
+
+        console.log("urlRecover => ", urlRecover);
+        setIsLoaded1(true);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    axios
+      .get(peopleUrl)
+      .then((resp) => {
+        setFetchData2(resp.data);
+        setIsLoaded1(true);
+        console.log("resp.data", resp.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   if (isLoaded && isLoaded1) {
     return fetchData.results.map((res, i) => {
@@ -51,11 +68,10 @@ export const Planets = () => {
           <div>
             <h5>Résidents:</h5>
             <ul>
-              {fetchData1.results.map((res, i) => {
+              {fetchData2.results.map((res, i) => {
                 return (
                   <li key={i}>
                     <a href={"/resident/" + (i + 1)}>{res.name}</a>
-                    {res.name}
                   </li>
                 );
               })}
