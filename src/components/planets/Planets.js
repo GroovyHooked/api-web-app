@@ -3,12 +3,7 @@ import axios from "axios";
 
 export const Planets = () => {
   const [fetchData, setFetchData] = useState({});
-  const [fetchData1, setFetchData1] = useState({});
-  const [fetchData2, setFetchData2] = useState({});
-  const [urlRecover, setUrlRecover] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isLoaded1, setIsLoaded1] = useState(false);
-
 
   const url = "https://swapi.dev/api/planets/";
   const peopleUrl = "https://swapi.dev/api/people/";
@@ -27,16 +22,21 @@ export const Planets = () => {
 
   }, []);
 
+  let arr = [];
    const getName = (url, id) => {
     axios.get(url + id + '/')
           .then((res) => {
-            console.log("res => "+res.data.name)
-            return res.data.name
+            console.log(arr)
+            arr.push({name: res.data.name}) 
+          }).catch((err) => {
+            console.log(err);
           })
+          
   }
 
 
   if (isLoaded ) {
+    
     return fetchData.results.map((planet, i) => {
       return (
         <div key={i++}>
@@ -53,7 +53,7 @@ export const Planets = () => {
                 let id = splitUrl[splitUrl.length - 2];
                 return (
                   <li key={i}>
-                    <a href={"/resident/" + (id)}>{res}</a>
+                    <a href={"/resident/" + (id)}>Résient {i+1}</a>
                   </li>
                 );
               })}
