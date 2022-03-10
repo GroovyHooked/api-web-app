@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Peep } from "./Peep";
-import axios from "axios";
 
 export const Species = () => {
   const [fetchData, setFetchData] = useState({});
@@ -10,10 +9,10 @@ export const Species = () => {
   const url = "https://swapi.dev/api/species/";
 
   useEffect(() => {
-    axios
-      .get(url)
+      fetch(url)
+      .then(res => res.json())
       .then((resp) => {
-        setFetchData(resp.data);
+        setFetchData(resp);
         setIsLoaded(true);
       })
       .catch(function (error) {

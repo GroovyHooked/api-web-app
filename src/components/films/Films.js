@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Character } from "../character/Character";
-import axios from "axios";
 
 export const Films = () => {
     const [fetchData, setFetchData] = useState({});
@@ -10,10 +9,10 @@ export const Films = () => {
     const url = "https://swapi.dev/api/films/";
   
     useEffect(() => {
-      axios
-        .get(url)
+        fetch(url)
+        .then(res => res.json())
         .then((resp) => {
-          setFetchData(resp.data);
+          setFetchData(resp);
           setIsLoaded(true);
         })
         .catch(function (error) {

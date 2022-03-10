@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 export const PlanetsResident = () => {
   const [fetchData, setFetchData] = useState({});
@@ -13,11 +12,12 @@ export const PlanetsResident = () => {
 
   const urlToFetch = url + id + "/";
   useEffect(() => {
-    axios
-      .get(urlToFetch)
-      .then((resp) => {
-        setFetchData(resp.data);
+      fetch(urlToFetch)
+      .then(res => res.json())
+      .then((res) => {
+        setFetchData(res);
         setIsLoaded(true);
+        console.log("fetchData => " , res)
       })
       .catch(function (error) {
         console.log(error);
