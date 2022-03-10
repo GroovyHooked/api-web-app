@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 export const Menu = () => {
@@ -9,10 +8,10 @@ export const Menu = () => {
   const url = "https://swapi.dev/api/";
 
   useEffect(() => {
-    axios
-      .get(url)
+      fetch(url)
+      .then(res => res.json())
       .then((resp) => {
-        setFetchData(resp.data);
+        setFetchData(resp);
         setIsLoaded(true);
       })
       .catch(function (error) {
