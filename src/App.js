@@ -8,7 +8,8 @@ import { Films } from "./components/films/Films";
 import { Species } from "./components/species/Species";
 import { Planet } from "./components/planets/Planet";
 import { Test } from "./components/Test";
-import { Pokemon } from "./components/Pokemon.js";
+import { Pokemons } from "./components/Pokemons";
+import { Vehicules } from "./components/vehicule/Vehicules";
 
 import "./App.css";
 let foo = window.location.href;
@@ -21,7 +22,6 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Menu />} />
-
         <Route path="/people" element={<People />} />
         <Route path="/planets" element={<Planets />} />
         <Route path="/resident/:id" element={<PlanetsResident />} />
@@ -29,7 +29,8 @@ function App() {
         <Route path="/species" element={<Species />} />
         <Route path="/planet/:id" element={<Planet />} />
         <Route path="/test" element={<Test />} />
-        <Route path="/pokemon" element={<Pokemon />} />
+        <Route path="/pokemon" element={<Pokemons />} />
+        <Route path="/vehicles" element={<Vehicules />} />
       </Routes>
     </div>
   );

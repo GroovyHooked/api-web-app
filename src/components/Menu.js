@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import "../assets/styles/Menu.css";
 
 export const Menu = () => {
   const [fetchData, setFetchData] = useState({});
@@ -8,8 +9,8 @@ export const Menu = () => {
   const url = "https://swapi.dev/api/";
 
   useEffect(() => {
-      fetch(url)
-      .then(res => res.json())
+    fetch(url)
+      .then((res) => res.json())
       .then((resp) => {
         setFetchData(resp);
         setIsLoaded(true);
@@ -33,7 +34,7 @@ export const Menu = () => {
   let y = 100;
   if (isLoaded) {
     return (
-      <>
+      <div className="menu">
         {arr.map((cat) => {
           return (
             <>
@@ -45,7 +46,7 @@ export const Menu = () => {
             </>
           );
         })}
-      </>
+      </div>
     );
   } else {
     return <div>Waiting</div>;

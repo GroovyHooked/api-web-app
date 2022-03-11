@@ -10,9 +10,12 @@ export const Pokemon = () => {
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((res) => setPokArr(res));
-    setIsLoaded(true);
-    console.log(pokArr);
+      .then((res) => {
+        setPokArr(res);
+        setIsLoaded(true);
+        console.log(pokArr);
+      })
+      .catch((err) => console.error(err));
   });
 
   const elements = (type) => {

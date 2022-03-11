@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-export const Films = () => {
+export const Vehicules = () => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const url = "https://swapi.dev/api/films/";
+  const url = "https://swapi.dev/api/vehicles/";
 
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((resp) => {
         setFetchData(resp);
+        console.log("resp => ", resp);
         setIsLoaded(true);
       })
       .catch(function (error) {
@@ -24,34 +25,20 @@ export const Films = () => {
     return fetchData.results.map((res) => {
       return (
         <div key={i++}>
-          <h4>{res.title}</h4>
-          <p>episode_id: {res.episode_id}</p>
-          <p>opening_crawl: {res.opening_crawl}</p>
+          <h4>{res.name}</h4>
+          <p>episode_id: {res.manufacturer}</p>
+          <p>opening_crawl: {res.model}</p>
           <p>director: {res.director}</p>
-          <p>producer: {res.producer}</p>
+          <p>producer: {res.passengers}</p>
           <div>
-            <h5>characters:</h5>
+            <h5>pilots:</h5>
             <ul>
-              {res.characters.map((character, i) => {
-                let splitUrl = character.split("/");
+              {res.pilots.map((pilot, i) => {
+                let splitUrl = pilot.split("/");
                 let id = splitUrl[splitUrl.length - 2];
                 return (
                   <li key={i}>
-                    <a href={"/resident/" + id}>Character {i + 1}</a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div>
-            <h5>Planets:</h5>
-            <ul>
-              {res.planets.map((planet, i) => {
-                let splitUrl = planet.split("/");
-                let id = splitUrl[splitUrl.length - 2];
-                return (
-                  <li key={i}>
-                    <a href={"/planet/" + id}>Planets: {i + 1}</a>
+                    <a href={"/resident/" + id}>pilot {i + 1}</a>
                   </li>
                 );
               })}

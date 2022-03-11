@@ -12,6 +12,7 @@ export const Navbar = () => {
       <Link to="/species">Species</Link>
       <Link to="/test">Test1</Link>
       <Link to="/pokemon">Pokemon</Link>
+      <Link to="/vehicles">Pokemon</Link>
     </nav>
   );
 };
