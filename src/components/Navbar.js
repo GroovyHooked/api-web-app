@@ -10,6 +10,8 @@ export const Navbar = () => {
       <Link to="/planets">Planets</Link>
       <Link to="/films">Films</Link>
       <Link to="/species">Species</Link>
+      <Link to="/test">Test1</Link>
+      <Link to="/pokemon">Pokemon</Link>
     </nav>
   );
 };
