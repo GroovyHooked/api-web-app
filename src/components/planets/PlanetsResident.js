@@ -4,20 +4,21 @@ export const PlanetsResident = () => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const url = "https://swapi.dev/api/people/";
+  const residents = "https://swapi.dev/api/people/";
+  const movies = "https://swapi.dev/api/films/";
 
   const currentUrl = window.location.href;
   let splitUrl = currentUrl.split("/");
   const id = splitUrl[splitUrl.length - 1];
 
-  const urlToFetch = url + id + "/";
+  const urlToFetch = residents + id + "/";
   useEffect(() => {
-      fetch(urlToFetch)
-      .then(res => res.json())
+    fetch(urlToFetch)
+      .then((res) => res.json())
       .then((res) => {
         setFetchData(res);
         setIsLoaded(true);
-        console.log("fetchData => " , res)
+        console.log("fetchData => ", res);
       })
       .catch(function (error) {
         console.log(error);
@@ -26,7 +27,9 @@ export const PlanetsResident = () => {
 
   if (isLoaded) {
     console.log(fetchData);
-
+    /**
+     * TODO: Find a way to show error messages when data isn't available (vehicule)
+     */
     return (
       <div>
         <p>Coucou</p>
@@ -41,16 +44,22 @@ export const PlanetsResident = () => {
               <h5>films:</h5>
               <ul>
                 {fetchData.films.map((film, i) => {
-                  return <li key={i}>{film}</li>;
+                  return (
+                    <li key={i}>
+                      <a href={"/movie/"}>{film}</a>
+                    </li>
+                  );
                 })}
               </ul>
             </div>
             <div>
-              <h5>films:</h5>
+              <h5>Véhicules:</h5>
               <ul>
-                {fetchData.vehicles.map((vehicle, i) => {
-                  return <li key={i}>{vehicle}</li>;
-                })}
+                {fetchData.vehicules !== []
+                  ? fetchData.vehicles.map?.((vehicle, i) => (
+                      <li key={i}>{vehicle}</li>
+                    ))
+                  : "<p>This resident doesn't own a vehicule</p>"}
               </ul>
             </div>
           </>

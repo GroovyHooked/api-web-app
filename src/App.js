@@ -6,6 +6,8 @@ import { Planets } from "./components/planets/Planets";
 import { PlanetsResident } from "./components/planets/PlanetsResident";
 import { Films } from "./components/films/Films";
 import { Species } from "./components/species/Species";
+import { Planet } from "./components/planets/Planet";
+
 import "./App.css";
 let foo = window.location.href;
 console.log("foo: " + foo);
@@ -23,6 +25,7 @@ function App() {
         <Route path="/resident/:id" element={<PlanetsResident />} />
         <Route path="/films" element={<Films />} />
         <Route path="/species" element={<Species />} />
+        <Route path="/planet/:id" element={<Planet />} />
       </Routes>
     </div>
   );
