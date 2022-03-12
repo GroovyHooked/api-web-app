@@ -31,7 +31,7 @@ export const Pokemon = () => {
         console.log(pokArr);
       })
       .catch((err) => console.error(err));
-  }, [pokArr]);
+  }, []);
 
   const elements = (type) => {
     if (type === "poison") return <div className="element poison">Poison</div>;
