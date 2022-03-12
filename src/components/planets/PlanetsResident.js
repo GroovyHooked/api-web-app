@@ -32,7 +32,6 @@ export const PlanetsResident = () => {
      */
     return (
       <div>
-        <p>Coucou</p>
         {
           <>
             <h4>{fetchData.name}</h4>
@@ -44,9 +43,11 @@ export const PlanetsResident = () => {
               <h5>films:</h5>
               <ul>
                 {fetchData.films.map((film, i) => {
+                  let splitUrl = film.split("/");
+                  let id = splitUrl[splitUrl.length - 2];
                   return (
                     <li key={i}>
-                      <a href={"/movie/"}>{film}</a>
+                      <a href={"/film/" + id}>Film: {id}</a>
                     </li>
                   );
                 })}
