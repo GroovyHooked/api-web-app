@@ -33,12 +33,12 @@ export const Species = () => {
           <div>
             <h5>people:</h5>
             <ul>
-              {res.people.map((p, i) => {
+              {res.people.map((character, i) => {
+                let splitUrl = character.split("/");
+                let id = splitUrl[splitUrl.length - 2];
                 return (
                   <li key={i}>
-                    <Link to={"/people/" + i} children={<Peep id="" />}>
-                      {p}
-                    </Link>
+                    <a href={"/resident/" + id}>Character {i + 1}</a>
                   </li>
                 );
               })}
