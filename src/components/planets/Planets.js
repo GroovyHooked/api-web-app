@@ -5,7 +5,6 @@ export const Planets = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const url = "https://swapi.dev/api/planets/";
-  const peopleUrl = "https://swapi.dev/api/people/";
 
   useEffect(() => {
     fetch(url)
@@ -35,7 +34,6 @@ export const Planets = () => {
   };
 
   if (isLoaded) {
-    
     return fetchData.map((planet, i) => {
       return (
         <div key={i++}>

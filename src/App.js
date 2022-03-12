@@ -11,12 +11,10 @@ import { Test } from "./components/Test";
 import { Pokemons } from "./components/Pokemons";
 import { Vehicules } from "./components/vehicule/Vehicules";
 import { Film } from "./components/films/Film";
-
+import { Starships } from "./components/starship/Starships";
 import "./App.css";
-let foo = window.location.href;
-console.log("foo: " + foo);
-let bar = foo.split("/");
-console.log("bar : " + bar);
+
+
 function App() {
   return (
     <div className="App">
@@ -33,6 +31,7 @@ function App() {
         <Route path="/test" element={<Test />} />
         <Route path="/pokemon" element={<Pokemons />} />
         <Route path="/vehicles" element={<Vehicules />} />
+        <Route path="/starships" element={<Starships />} />
       </Routes>
     </div>
   );

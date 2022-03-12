@@ -5,7 +5,6 @@ export const PlanetsResident = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const residents = "https://swapi.dev/api/people/";
-  const movies = "https://swapi.dev/api/films/";
 
   const currentUrl = window.location.href;
   let splitUrl = currentUrl.split("/");
@@ -26,7 +25,6 @@ export const PlanetsResident = () => {
   }, []);
 
   if (isLoaded) {
-    console.log(fetchData);
     /**
      * TODO: Find a way to show error messages when data isn't available (vehicule)
      */

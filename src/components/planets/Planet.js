@@ -9,7 +9,6 @@ export const Planet = () => {
   const currentUrl = window.location.href;
   let splitUrl = currentUrl.split("/");
   const id = splitUrl[splitUrl.length - 1];
-  console.log(id);
   const urlToFetch = planets + id + "/";
 
   useEffect(() => {
@@ -26,7 +25,6 @@ export const Planet = () => {
   }, []);
 
   if (isLoaded) {
-    //console.log(fetchData);
     return (
       <div>
         <h4>Planet: {fetchData.name}</h4>
