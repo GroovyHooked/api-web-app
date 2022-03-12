@@ -35,7 +35,7 @@ export const Species = () => {
             <ul>
               {res.people.map((p, i) => {
                 return (
-                  <li>
+                  <li key={i}>
                     <Link to={"/people/" + i} children={<Peep id="" />}>
                       {p}
                     </Link>
