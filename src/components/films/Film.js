@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export const Film = () => {
+export const Film = ({residentArray}) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -40,7 +40,7 @@ export const Film = () => {
               let id = splitUrl[splitUrl.length - 2];
               return (
                 <li key={i}>
-                  <a href={"/resident/" + id}>Character {i + 1}</a>
+                  <a href={"/resident/" + id}>{residentArray[id-1]}∑</a>
                 </li>
               );
             })}

@@ -5,7 +5,6 @@ import "../assets/styles/Menu.css";
 export const Menu = () => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-  
 
   const url = "https://swapi.dev/api/";
 
@@ -22,7 +21,6 @@ export const Menu = () => {
   }, []);
 
   let arr = [];
-
   const iterate = () => {
     for (const [key] of Object.entries(fetchData)) {
       arr.push(key);
@@ -30,12 +28,12 @@ export const Menu = () => {
   };
 
   iterate();
-  console.log(arr);
+  //console.log(arr);
   let i = 0;
   let y = 100;
   if (isLoaded) {
     return (
-      <div className="menu" >
+      <div className="menu">
         {arr.map((cat) => {
           return (
             <>

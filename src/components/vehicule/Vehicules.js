@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export const Vehicules = () => {
+export const Vehicules = ({ residentArray }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -38,7 +38,7 @@ export const Vehicules = () => {
                 let id = splitUrl[splitUrl.length - 2];
                 return (
                   <li key={i}>
-                    <a href={"/resident/" + id}>pilot {i + 1}</a>
+                    <a href={"/resident/" + id}>{residentArray[id - 1]}∑</a>
                   </li>
                 );
               })}

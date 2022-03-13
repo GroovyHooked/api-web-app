@@ -3,18 +3,18 @@ import React, { useEffect, useState } from "react";
 import "../assets/styles/Pokemon.css";
 
 export const Pokemon = () => {
-// let initialStyle = {
-//   display: "flex",
-//   flexDirection: "column",
-//   justifyContent: "center",
-//   borderRadius: "1.5rem",
-//   height: "200px",
-//   width: "200px",
-//   margin: "10px",
-//   textAlign: "center",
-//   boxShadow: "5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22)",
-//   backgroundColor: "#43AA8B"
-// }
+  // let initialStyle = {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   justifyContent: "center",
+  //   borderRadius: "1.5rem",
+  //   height: "200px",
+  //   width: "200px",
+  //   margin: "10px",
+  //   textAlign: "center",
+  //   boxShadow: "5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22)",
+  //   backgroundColor: "#43AA8B"
+  // }
 
   const [pokArr, setPokArr] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -40,12 +40,15 @@ export const Pokemon = () => {
     if (type === "rock") return <div className="element rock">Rock</div>;
     if (type === "ground") return <div className="element ground">Ground</div>;
     if (type === "normal") return <div className="element normal">Normal</div>;
-    if (type === "psychic") return <div className="element psychic">Psychic</div>;
+    if (type === "psychic")
+      return <div className="element psychic">Psychic</div>;
     if (type === "ice") return <div className="element ice">Ice</div>;
     if (type === "water") return <div className="element water">water</div>;
-    if (type === "electric") return <div className="element electric">electric</div>;
+    if (type === "electric")
+      return <div className="element electric">electric</div>;
     if (type === "fairy") return <div className="element fairy">fairy</div>;
-    if (type === "fighting") return <div className="element fighting">fighting</div>;
+    if (type === "fighting")
+      return <div className="element fighting">fighting</div>;
     if (type === "steel") return <div className="element steel">steel</div>;
     if (type === "ghost") return <div className="element ghost">ghost</div>;
     if (type === "dragon") return <div className="element dragon">dragon</div>;
@@ -53,13 +56,13 @@ export const Pokemon = () => {
     if (type === "bug") return <div className="element bug">bug</div>;
   };
 
-  let arr = []
+  let arr = [];
   const addUnique = (arr, item) => {
-    if(arr.indexOf(item) === -1) {
+    if (arr.indexOf(item) === -1) {
       arr.push(item);
       console.log(arr);
-  }
-  }
+    }
+  };
   const Poke = () => {
     return pokArr.map((pokemon, index) => {
       return (
@@ -82,20 +85,18 @@ export const Pokemon = () => {
   };
 
   const smallGrid = (style) => {
-    setStyle(style.height = "80px");
-      style.width= "80px";
-      style.flexDirection = "row";
+    setStyle((style.height = "80px"));
+    style.width = "80px";
+    style.flexDirection = "row";
   };
 
   if (isLoaded) {
-
     return (
       <>
         <button onClick={() => smallGrid(style)}>Test</button>
-      <div className="poke-container">
-        <Poke style={style}/>
-      </div>
-      
+        <div className="poke-container">
+          <Poke style={style} />
+        </div>
       </>
     );
   } else {

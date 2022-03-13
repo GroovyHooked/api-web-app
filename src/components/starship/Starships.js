@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-export const Starships = () => {
+export const Starships = ({ movieList }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
   const starshipsUrl = "https://swapi.dev/api/starships/";
-  
 
   useEffect(() => {
     fetch(starshipsUrl)
@@ -22,7 +21,6 @@ export const Starships = () => {
   }, []);
 
   if (isLoaded) {
-    
     return fetchData.map((starship, i) => {
       return (
         <div key={i}>
@@ -38,8 +36,11 @@ export const Starships = () => {
                 {starship.films.map((res, i) => {
                   let splitUrl = res.split("/");
                   let id = splitUrl[splitUrl.length - 2];
-                  return <li key={i}><a href={"/film/" + id}>Film: {id}</a></li>;
-
+                  return (
+                    <li key={i}>
+                      <a href={"/film/" + id}>{movieList[id - 1]}</a>
+                    </li>
+                  );
                 })}
               </ul>
             }

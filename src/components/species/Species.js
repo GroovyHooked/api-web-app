@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-
-export const Species = () => {
+export const Species = ({ residentArray }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-
+  //console.log(residentArray)
   const url = "https://swapi.dev/api/species/";
 
   useEffect(() => {
-      fetch(url)
-      .then(res => res.json())
+    fetch(url)
+      .then((res) => res.json())
       .then((resp) => {
         setFetchData(resp);
         setIsLoaded(true);
@@ -37,7 +36,7 @@ export const Species = () => {
                 let id = splitUrl[splitUrl.length - 2];
                 return (
                   <li key={i}>
-                    <a href={"/resident/" + id}>Character {i + 1}</a>
+                    <a href={"/resident/" + id}>{residentArray[id - 1]}</a>
                   </li>
                 );
               })}
@@ -50,6 +49,3 @@ export const Species = () => {
     return <div>Waiting...</div>;
   }
 };
-
-
-  

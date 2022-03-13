@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-export const Planets = () => {
+export const Planets = ({ residentArray }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-
+  console.log("PLANET resArr => ", residentArray);
   const url = "https://swapi.dev/api/planets/";
 
   useEffect(() => {
@@ -19,19 +19,6 @@ export const Planets = () => {
         console.log(error);
       });
   }, []);
-
-  let arr = [];
-  const getName = (url, id) => {
-    fetch(url + id + "/")
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(arr);
-        arr.push(res.name);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   if (isLoaded) {
     return fetchData.map((planet, i) => {
@@ -51,7 +38,7 @@ export const Planets = () => {
                   let id = splitUrl[splitUrl.length - 2];
                   return (
                     <li key={i}>
-                      <a href={"/resident/" + id}>Résient {i + 1}</a>
+                      <a href={"/resident/" + id}>{residentArray[id - 1]}</a>
                     </li>
                   );
                 })}
