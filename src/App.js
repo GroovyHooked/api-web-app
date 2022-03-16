@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { Menu } from "./components/Menu";
 import { Routes, Route } from "react-router-dom";
 import { People } from "./components/people/People";
@@ -48,7 +48,7 @@ function App() {
   const vehiculeUrl3 = "https://swapi.dev/api/vehicles/?page=3";
   const vehiculeUrl4 = "https://swapi.dev/api/vehicles/?page=4";
 
-  useEffect(() => {
+  useMemo(() => {
     // for (let i = 1; i < 9; i++) {
     //   fetch(url + i)
     //     .then((res) => res.json())
@@ -162,7 +162,7 @@ function App() {
     //   }
     // }
     movies.forEach((movie) => movieList.push(movie.title));
-    console.log("movies => ", movies);
+    console.log("App::movies => ", movies);
     data1.forEach((movie) => residentList.push(movie.name));
     data2.forEach((movie) => residentList.push(movie.name));
     data3.forEach((movie) => residentList.push(movie.name));
