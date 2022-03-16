@@ -60,7 +60,7 @@ export const Pokemon = () => {
   const addUnique = (arr, item) => {
     if (arr.indexOf(item) === -1) {
       arr.push(item);
-      console.log(arr);
+      //console.log(arr);
     }
   };
   const Poke = () => {

@@ -3,17 +3,16 @@ import React, { useState, useEffect } from "react";
 export const Planets = ({ residentArray }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log("PLANET resArr => ", residentArray);
+  console.log("Planets::residentArrayProp => ", residentArray);
   const url = "https://swapi.dev/api/planets/";
 
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.results);
         setFetchData(res.results);
-        console.log("fetchData1 => ", res.results);
         setIsLoaded(true);
+        console.log("Planets::res.results => ",res.results);
       })
       .catch(function (error) {
         console.log(error);

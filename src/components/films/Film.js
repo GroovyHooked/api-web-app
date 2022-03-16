@@ -9,7 +9,7 @@ export const Film = ({residentArray}) => {
   const currentUrl = window.location.href;
   let splitUrl = currentUrl.split("/");
   const id = splitUrl[splitUrl.length - 1];
-  console.log(id);
+  //console.log(id);
   const urlToFetch = url + id + "/";
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export const Film = ({residentArray}) => {
       .then((res) => {
         setFetchData(res);
         setIsLoaded(true);
-        console.log("fetchData => ", res);
+        console.log("Film::fetchData => ", res);
       })
       .catch(function (error) {
         console.log(error);

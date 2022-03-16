@@ -6,7 +6,7 @@ import "../../assets/styles/People.css";
 export const People = ({ movieList }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log("movieList => ", movieList);
+  console.log("People::movieList => ", movieList);
   const url = "https://swapi.dev/api/people/";
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export const People = ({ movieList }) => {
               {res.films.map((film, i) => {
                 let splitUrl = film.split("/");
                 let id = splitUrl[splitUrl.length - 2];
-                console.log("id => ", id);
+                //console.log("id => ", id);
                 return (
                   <li key={i}>
                     <a href={"/film/" + id}>{movieList[id - 1]}</a>

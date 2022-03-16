@@ -17,7 +17,7 @@ export const Planet = ({ residentArray }) => {
       .then((res) => {
         setFetchData(res);
         setIsLoaded(true);
-        console.log("fetchData => ", res);
+        console.log("Planet::fetchData => ", res);
       })
       .catch(function (error) {
         console.log(error);

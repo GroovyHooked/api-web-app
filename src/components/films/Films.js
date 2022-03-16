@@ -19,7 +19,7 @@ export const Films = ({ residentArray }) => {
   }, []);
 
   if (isLoaded) {
-    console.log(fetchData.results);
+    console.log( "Films::fetchData.results => " ,fetchData.results);
     let i = 1;
     return fetchData.results.map((res) => {
       return (

@@ -10,9 +10,9 @@ export const Starships = ({ movieList }) => {
     fetch(starshipsUrl)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.results);
+        //console.log(res.results);
         setFetchData(res.results);
-        console.log("fetchData1 => ", res.results);
+        console.log("Starships::fetchData => ", res.results);
         setIsLoaded(true);
       })
       .catch(function (error) {

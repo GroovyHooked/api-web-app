@@ -17,13 +17,13 @@ export const PlanetsResident = ({ movieList, vehiculeList }) => {
       .then((res) => {
         setFetchData(res);
         setIsLoaded(true);
-        console.log("fetchData => ", res);
+        console.log("PlanetsResident::fetchRes => ", res);
       })
       .catch(function (error) {
         console.log(error);
       });
   }, []);
-  console.log({ residents: residents, id: id });
+  console.log( "PlanetsResident::Object.log =>" ,{ residents: residents, id: id });
   if (isLoaded) {
     /**
      * TODO: Find a way to show error messages when data isn't available (vehicule)
@@ -45,7 +45,7 @@ export const PlanetsResident = ({ movieList, vehiculeList }) => {
                 {fetchData.films.map((film, i) => {
                   let splitUrl = film.split("/");
                   let id = splitUrl[splitUrl.length - 2];
-                  console.log(id);
+                  //console.log(id);
                   return (
                     <li key={i}>
                       <a href={"/film/" + id}>{movieList[id - 1]}</a>

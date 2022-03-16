@@ -11,7 +11,7 @@ export const Vehicules = ({ residentArray }) => {
       .then((res) => res.json())
       .then((resp) => {
         setFetchData(resp);
-        console.log("resp => ", resp);
+        console.log("Vehicules::resp => ", resp);
         setIsLoaded(true);
       })
       .catch(function (error) {
@@ -20,7 +20,7 @@ export const Vehicules = ({ residentArray }) => {
   }, []);
 
   if (isLoaded) {
-    console.log(fetchData.results);
+    console.log("Vehicules::fetchData.results => ",fetchData.results);
     let i = 1;
     return fetchData.results.map((res) => {
       return (
