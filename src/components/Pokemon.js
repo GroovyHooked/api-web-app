@@ -3,22 +3,30 @@ import React, { useEffect, useState } from "react";
 import "../assets/styles/Pokemon.css";
 
 export const Pokemon = () => {
-  // let initialStyle = {
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   justifyContent: "center",
-  //   borderRadius: "1.5rem",
-  //   height: "200px",
-  //   width: "200px",
-  //   margin: "10px",
-  //   textAlign: "center",
-  //   boxShadow: "5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22)",
-  //   backgroundColor: "#43AA8B"
-  // }
 
+  let initialContainerStyle = {
+    width: "100%",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+  }
+
+let initialChildStyle = {
+ display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    borderRadius: "1.5rem",
+    height: "200px",
+    width: "200px",
+    margin: "10px",
+    textAlign: "center",
+    boxShadow: "5px 5px 30px 7px rgba(0, 0, 0, 0.25), -5px -5px 30px 7px rgba(0, 0, 0, 0.22)",
+    backgroundColor: "#43AA8B"
+}
   const [pokArr, setPokArr] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [style, setStyle] = useState({});
+  const [containerStyle, setContainerStyle] = useState(initialContainerStyle);
+  const [cildrenStyle, setcildrenStyle] = useState(initialChildStyle);
 
   const url = "https://pokedex-jgabriele.vercel.app/pokemons.json";
 
@@ -72,7 +80,7 @@ export const Pokemon = () => {
         <div
           key={index}
           className="pokemon"
-          style={style.height === "80px" ? style : null}
+          style={cildrenStyle}
         >
           <h4>{pokemon.names.fr}</h4>
           <img src={pokemon.image} alt={"pokemon " + pokemon.names.fr} />
@@ -86,19 +94,28 @@ export const Pokemon = () => {
       );
     });
   };
-
-  const smallGrid = (style) => {
-    setStyle((style.height = "80px"));
-    style.width = "80px";
-    style.flexDirection = "row";
-  };
-
+  const modify = () => {
+    if(cildrenStyle.height === '200px'){
+      setcildrenStyle({
+      height: '115px',
+      width: '115px',
+      transform: 'scale(0.7)'
+    })
+    setContainerStyle({
+      width: '100vw',
+    })
+    } else {
+      setcildrenStyle(initialChildStyle)
+      setContainerStyle(initialContainerStyle)
+    }
+    
+  }
   if (isLoaded) {
     return (
       <>
-        <button onClick={() => smallGrid(style)}>Test</button>
-        <div className="poke-container">
-          <Poke style={style} />
+        <button onClick={() => modify()}>⇢⇠/⇠⇢</button>
+        <div className="poke-container" style={containerStyle}>
+          <Poke />
         </div>
       </>
     );
