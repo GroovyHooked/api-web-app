@@ -4,24 +4,26 @@ export const Planet = ({ residentArray }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const planets = "https://swapi.dev/api/planets/";
+  const fetchPlanets = async () => {
+    const planets = "https://swapi.dev/api/planets/";
+  
+    const currentUrl = window.location.href;
+    let splitUrl = currentUrl.split("/");
+    const id = splitUrl[splitUrl.length - 1];
+    const urlToFetch = planets + id + "/";
 
-  const currentUrl = window.location.href;
-  let splitUrl = currentUrl.split("/");
-  const id = splitUrl[splitUrl.length - 1];
-  const urlToFetch = planets + id + "/";
+    const response = await fetch(urlToFetch)
+    const data = await response.json();
+    try {
+      setFetchData(data);
+        setIsLoaded(true);
+        console.log("Planet::fetchData => ", data);
+    } catch (err) {console.error(err)}
+
+  }
 
   useEffect(() => {
-    fetch(urlToFetch)
-      .then((res) => res.json())
-      .then((res) => {
-        setFetchData(res);
-        setIsLoaded(true);
-        console.log("Planet::fetchData => ", res);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    fetchPlanets()
   }, []);
 
   if (isLoaded) {
