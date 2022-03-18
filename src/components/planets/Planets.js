@@ -6,17 +6,22 @@ export const Planets = ({ residentArray }) => {
   console.log("Planets::residentArrayProp => ", residentArray);
   const url = "https://swapi.dev/api/planets/";
 
+  const fetchPlanetData = async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    try {
+      setFetchData(data.results);
+      setIsLoaded(true);
+      console.log("Planets::res.results => ",data.results);
+    }
+    catch (error) {
+      console.error(error);
+    }
+  }
+
+
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        setFetchData(res.results);
-        setIsLoaded(true);
-        console.log("Planets::res.results => ",res.results);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    fetchPlanetData()
   }, []);
 
   if (isLoaded) {
