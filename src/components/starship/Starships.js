@@ -5,18 +5,20 @@ export const Starships = ({ movieList }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const starshipsUrl = "https://swapi.dev/api/starships/";
-const fetchStarShips = async () => {
-  const response = await fetch(starshipsUrl);
-  const data = await response.json();
-  try{
-    setFetchData(data.results);
-    console.log("Starships::fetchData => ", data.results);
-    setIsLoaded(true);
-  } catch(err) { console.error(err) }
-}
+  const fetchStarShips = async () => {
+    const response = await fetch(starshipsUrl);
+    const data = await response.json();
+    try {
+      setFetchData(data.results);
+      console.log("Starships::fetchData => ", data.results);
+      setIsLoaded(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useMemo(() => {
-    fetchStarShips()
+    fetchStarShips();
   }, []);
 
   if (isLoaded) {

@@ -22,15 +22,18 @@ export const Pokemon = () => {
 
   const url = "https://pokedex-jgabriele.vercel.app/pokemons.json";
 
+  const fetchPokemons = async () => {
+    const response = await fetch(url)
+    const data = await response.json();
+    try {
+      setPokArr(data);
+      setIsLoaded(true);
+      console.log(pokArr);
+    } catch (err) {console.error(err)}
+  }
+
   useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        setPokArr(res);
-        setIsLoaded(true);
-        console.log(pokArr);
-      })
-      .catch((err) => console.error(err));
+    fetchPokemons()
   }, []);
 
   const elements = (type) => {

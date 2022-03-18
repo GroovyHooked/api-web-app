@@ -4,26 +4,27 @@ export const PlanetsResident = ({ movieList, vehiculeList }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const residents = "https://swapi.dev/api/people/";
+  const fetchResident = async () => {
+    const residents = "https://swapi.dev/api/people/";
 
-  const currentUrl = window.location.href;
-  let splitUrl = currentUrl.split("/");
-  const id = splitUrl[splitUrl.length - 1];
+    const currentUrl = window.location.href;
+    let splitUrl = currentUrl.split("/");
+    const id = splitUrl[splitUrl.length - 1];
+    const urlToFetch = residents + id + "/";
 
-  const urlToFetch = residents + id + "/";
-  useEffect(() => {
-    fetch(urlToFetch)
-      .then((res) => res.json())
-      .then((res) => {
-        setFetchData(res);
+    const response = await fetch(urlToFetch)
+    const data = await response.json();
+    try{
+       setFetchData(data);
         setIsLoaded(true);
-        console.log("PlanetsResident::fetchRes => ", res);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+        console.log("PlanetsResident::fetchRes => ", data);
+    } catch(e){console.log(e)}
+  };
+
+  useEffect(() => {
+    fetchResident()
   }, []);
-  console.log( "PlanetsResident::Object.log =>" ,{ residents: residents, id: id });
+
   if (isLoaded) {
     /**
      * TODO: Find a way to show error messages when data isn't available (vehicule)

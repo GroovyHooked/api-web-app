@@ -3,7 +3,7 @@ import React, { useState, useMemo } from "react";
 export const Species = ({ residentArray }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-  //console.log(residentArray)
+
   const url = "https://swapi.dev/api/species/";
 
   const fetchSpecies = async () => {
@@ -14,6 +14,7 @@ export const Species = ({ residentArray }) => {
         setIsLoaded(true);
     } catch (err) {console.error(err)}
   }
+
   useMemo(() => {
     fetchSpecies()
   }, []);

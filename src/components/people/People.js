@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "../../assets/styles/Reset.css";
 import "../../assets/styles/People.css";
 
@@ -7,18 +6,20 @@ export const People = ({ movieList }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
   console.log("People::movieList => ", movieList);
-  const url = "https://swapi.dev/api/people/";
+  
 
+  const fetchPeople = async () => {
+    const url = "https://swapi.dev/api/people/";
+
+    const response = await fetch(url)
+    const data = await response.json();
+    try {
+      setFetchData(data)
+      setIsLoaded(true);
+    } catch (err) { console.error(err)}
+  }
   useEffect(() => {
-    axios
-      .get(url)
-      .then((resp) => {
-        setFetchData(resp.data);
-        setIsLoaded(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    fetchPeople()
   }, []);
 
   const MyPeeps = () => {
