@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import "../assets/styles/Menu.css";
 
@@ -8,16 +8,21 @@ export const Menu = () => {
 
   const url = "https://swapi.dev/api/";
 
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((resp) => {
-        setFetchData(resp);
-        setIsLoaded(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const fetchMenuData = async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+
+    try {
+      setFetchData(data);
+      setIsLoaded(true);
+      console.log("Menu::Test useMemo data => ", data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useMemo(() => {
+    fetchMenuData();
   }, []);
 
   let arr = [];

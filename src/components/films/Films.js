@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 
 export const Films = ({ residentArray }) => {
   const [fetchData, setFetchData] = useState({});
@@ -6,16 +6,19 @@ export const Films = ({ residentArray }) => {
 
   const url = "https://swapi.dev/api/films/";
 
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((resp) => {
-        setFetchData(resp);
-        setIsLoaded(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  const fetchMovies = async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    try {
+      setFetchData(data);
+      setIsLoaded(true);
+    } catch (err) { 
+      console.error(err)
+    }
+  }
+
+  useMemo(() => {
+    fetchMovies()
   }, []);
 
   if (isLoaded) {

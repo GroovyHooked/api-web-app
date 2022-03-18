@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 
 export const Species = ({ residentArray }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-  //console.log(residentArray)
+
   const url = "https://swapi.dev/api/species/";
 
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((resp) => {
-        setFetchData(resp);
+  const fetchSpecies = async () => {
+    const response = await fetch(url);
+    const data = await response.json();
+    try {
+      setFetchData(data);
         setIsLoaded(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    } catch (err) {console.error(err)}
+  }
+
+  useMemo(() => {
+    fetchSpecies()
   }, []);
 
   if (isLoaded) {
