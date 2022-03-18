@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 
 export const Film = ({residentArray}) => {
   const [fetchData, setFetchData] = useState({});
@@ -6,24 +6,24 @@ export const Film = ({residentArray}) => {
 
   const url = "https://swapi.dev/api/films/";
 
-  const currentUrl = window.location.href;
-  let splitUrl = currentUrl.split("/");
-  const id = splitUrl[splitUrl.length - 1];
-  //console.log(id);
-  const urlToFetch = url + id + "/";
+  const fetchMovieData = async () => {
+    const currentUrl = window.location.href;
+    let splitUrl = currentUrl.split("/");
+    const id = splitUrl[splitUrl.length - 1];
+    const urlToFetch = url + id + "/";
 
-  useEffect(() => {
-    fetch(urlToFetch)
-      .then((res) => res.json())
-      .then((res) => {
-        setFetchData(res);
-        setIsLoaded(true);
-        console.log("Film::fetchData => ", res);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [urlToFetch]);
+    const response = await fetch(urlToFetch)
+    const data = await response.json();
+    try {
+      setFetchData(data);
+      setIsLoaded(true);
+      console.log("Film::fetchData => ", data);
+    } catch (err) {console.error(err)}
+  }
+
+  useMemo(() => {
+    fetchMovieData()
+  }, []);
 
   if (isLoaded) {
     //console.log(fetchData);
@@ -40,7 +40,7 @@ export const Film = ({residentArray}) => {
               let id = splitUrl[splitUrl.length - 2];
               return (
                 <li key={i}>
-                  <a href={"/resident/" + id}>{residentArray[id-1]}∑</a>
+                  <a href={"/resident/" + id}>{residentArray[id-1]}</a>
                 </li>
               );
             })}

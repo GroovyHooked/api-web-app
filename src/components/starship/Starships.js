@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 
 export const Starships = ({ movieList }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
   const starshipsUrl = "https://swapi.dev/api/starships/";
+const fetchStarShips = async () => {
+  const response = await fetch(starshipsUrl);
+  const data = await response.json();
+  try{
+    setFetchData(data.results);
+    console.log("Starships::fetchData => ", data.results);
+    setIsLoaded(true);
+  } catch(err) { console.error(err) }
+}
 
-  useEffect(() => {
-    fetch(starshipsUrl)
-      .then((res) => res.json())
-      .then((res) => {
-        //console.log(res.results);
-        setFetchData(res.results);
-        console.log("Starships::fetchData => ", res.results);
-        setIsLoaded(true);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  useMemo(() => {
+    fetchStarShips()
   }, []);
 
   if (isLoaded) {

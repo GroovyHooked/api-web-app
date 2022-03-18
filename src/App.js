@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { Menu } from "./components/Menu";
 import { Routes, Route } from "react-router-dom";
 import { People } from "./components/people/People";
@@ -31,7 +31,10 @@ function App() {
   const [vehicles3, setVehicles3] = useState([]);
   const [vehicles4, setVehicles4] = useState([]);
 
-  const [bool, setBoolean] = useState(false);
+  const [boolMovies, setBoolMovies] = useState(false);
+  const [boolPeople, setBoolPeople] = useState(false);
+  const [boolVehicules, setBoolVehicules] = useState(false);
+
 
   const moviesUrl = "https://swapi.dev/api/films/";
   const url1 = "https://swapi.dev/api/people/?page=1";
@@ -49,6 +52,7 @@ function App() {
   const vehiculeUrl4 = "https://swapi.dev/api/vehicles/?page=4";
 
   const fetchVehicules = async () => {
+    if (boolVehicules) return
     const response1 = await fetch(vehiculeUrl1);
     const data1 = await response1.json();
     const data11 = data1.results
@@ -70,19 +74,23 @@ function App() {
       setVehicles2(data12);
       setVehicles3(data13);
       setVehicles4(data14);
+      setBoolVehicules(true)
     } catch(err){ console.error(err)}
   }
 
   const fetchMovieUrl = async () => {
+    if (boolMovies) return
     const response = await fetch(moviesUrl);
     const movieUrls = await response.json();
     const data = movieUrls.results
     try {
       setMovies(data)
+      setBoolMovies(true)
     } catch (e) {console.error(e)}
   }
 
   const fetchResidents = async () => {
+    if (boolPeople) return
     const response1 = await fetch(url1);
     const data1 = await response1.json();
     const data11 = data1.results
@@ -118,7 +126,6 @@ function App() {
     const response9 = await fetch(url9);
     const data9 = await response9.json();
     const data19 = data9.results
-    console.log(data19);
     try{
       setData1(data11);
       setData2(data12);
@@ -129,7 +136,7 @@ function App() {
       setData7(data17);
       setData8(data18);
       setData9(data19);
-      setBoolean(true);
+      setBoolPeople(true);
     } catch(err){ console.error(err)}
   };
 
@@ -146,7 +153,7 @@ function App() {
   let vehiculeList = [];
 
   
-  if (bool) {
+  if (boolMovies && boolPeople && boolVehicules) {
     movies.forEach((movie) => movieList.push(movie.title));
     console.log("App::movies => ", movies);
     data1.forEach((movie) => residentList.push(movie.name));
