@@ -21,12 +21,10 @@ export const Films = ({ residentArray }) => {
     fetchMovies()
   }, []);
 
-  if (isLoaded) {
-    console.log( "Films::fetchData.results => " ,fetchData.results);
-    let i = 1;
-    return fetchData.results.map((res) => {
+  const Movies = () => {
+    return fetchData.results.map((res, i) => {
       return (
-        <div key={i++}>
+        <div key={i} className="movies">
           <h4>{res.title}</h4>
           <p>episode_id: {res.episode_id}</p>
           <p>opening_crawl: {res.opening_crawl}</p>
@@ -63,6 +61,19 @@ export const Films = ({ residentArray }) => {
         </div>
       );
     });
+  }
+
+  if (isLoaded) {
+    console.log( "Films::fetchData.results => " ,fetchData.results);
+    return (
+      <>
+      <h3>Characters</h3>
+      <div className="container">
+        <Movies />
+      </div>
+    </>
+    )
+    
   } else {
     return <div>Waiting...</div>;
   }

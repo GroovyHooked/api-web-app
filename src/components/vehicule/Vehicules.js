@@ -19,12 +19,10 @@ export const Vehicules = ({ residentArray }) => {
       });
   }, []);
 
-  if (isLoaded) {
-    console.log("Vehicules::fetchData.results => ",fetchData.results);
-    let i = 1;
-    return fetchData.results.map((res) => {
+  const VehiculesComp = () => {
+    return fetchData.results.map((res, i) => {
       return (
-        <div key={i++}>
+        <div key={i} className="thumbnail">
           <h4>{res.name}</h4>
           <p>episode_id: {res.manufacturer}</p>
           <p>opening_crawl: {res.model}</p>
@@ -47,6 +45,17 @@ export const Vehicules = ({ residentArray }) => {
         </div>
       );
     });
+  }
+  if (isLoaded) {
+    return (
+      <>
+        <h3>Vehicules</h3>
+        <div className="container">
+          <VehiculesComp />
+        </div>
+      </>
+    );
+    
   } else {
     return <div>Waiting...</div>;
   }

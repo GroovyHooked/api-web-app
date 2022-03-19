@@ -11,19 +11,20 @@ export const Species = ({ residentArray }) => {
     const data = await response.json();
     try {
       setFetchData(data);
-        setIsLoaded(true);
-    } catch (err) {console.error(err)}
-  }
+      setIsLoaded(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useMemo(() => {
-    fetchSpecies()
+    fetchSpecies();
   }, []);
 
-  if (isLoaded) {
-    let i = 1;
-    return fetchData.results.map((res) => {
+  const Species = () => {
+    return fetchData.results.map((res, i) => {
       return (
-        <div key={i++}>
+        <div key={i} className="thumbnail">
           <h4>{res.name}</h4>
           <p>classification: {res.classification}</p>
           <p>designation: {res.designation}</p>
@@ -46,6 +47,17 @@ export const Species = ({ residentArray }) => {
         </div>
       );
     });
+  };
+
+  if (isLoaded) {
+    return (
+      <>
+        <h3>Species</h3>
+        <div className="container">
+          <Species />
+        </div>
+      </>
+    );
   } else {
     return <div>Waiting...</div>;
   }
