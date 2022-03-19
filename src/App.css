@@ -2,3 +2,23 @@
     width: 100vw;
     height: 100vh;
 }
+.container {
+    width: 90%;
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+
+.thumbnail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 3px 0px 7px -8px rgb(0 0 0 / 25%), -4px -1px 7px 5px rgb(0 0 0 / 29%);
+    width: 200px;
+    height: 250px;
+    margin: 5px;
+    border-radius: 1.5rem;
+    padding: 10px;
+}
