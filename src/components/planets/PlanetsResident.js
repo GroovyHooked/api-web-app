@@ -20,6 +20,7 @@ export const PlanetsResident = ({ movieList, vehiculeList }) => {
         console.log("PlanetsResident::fetchRes => ", data);
     } catch(e){console.log(e)}
   };
+console.log("PlanetsResident::fetchData.vehicles => ", fetchData.vehicles)
 
   useEffect(() => {
     fetchResident()
@@ -59,11 +60,16 @@ export const PlanetsResident = ({ movieList, vehiculeList }) => {
               <h5>Véhicules:</h5>
 
               <ul>
-                {fetchData.vehicules !== []
-                  ? fetchData.vehicles.map?.((vehicle, i) => (
-                      <li key={i}>{vehicle}</li>
-                    ))
-                  : "<p>This resident doesn't own a vehicule</p>"}
+                {fetchData.vehicles.map((vehicle, i) => { 
+                   let splitUrl2 = vehicle.split("/");
+                   let id = splitUrl2[splitUrl2.length - 2];
+                     return (
+                      <li key={i}>
+                         <a href={"/vehicule/" + id}>{vehiculeList[id]}</a>
+                      </li>
+                     )
+                })
+                 }
               </ul>
             </div>
           </>

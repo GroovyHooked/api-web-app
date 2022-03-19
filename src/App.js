@@ -13,9 +13,15 @@ import { Pokemons } from "./components/Pokemons";
 import { Vehicules } from "./components/vehicule/Vehicules";
 import { Film } from "./components/films/Film";
 import { Starships } from "./components/starship/Starships";
+import { Vehicule } from "./components/vehicule/Vehicule"
+import { FetchedData } from "./FetchedData";
 import "./App.css";
 
 function App() {
+  let foo = localStorage.getItem("people")
+
+  console.log( "foo => " ,foo.JSON)
+
   const [data1, setData1] = useState([]);
   const [data2, setData2] = useState([]);
   const [data3, setData3] = useState([]);
@@ -32,7 +38,7 @@ function App() {
   const [vehicles4, setVehicles4] = useState([]);
 
   const [boolMovies, setBoolMovies] = useState(false);
-  const [boolPeople, setBoolPeople] = useState(false);
+  //const [boolPeople, setBoolPeople] = useState(false);
   const [boolVehicules, setBoolVehicules] = useState(false);
 
 
@@ -52,7 +58,6 @@ function App() {
   const vehiculeUrl4 = "https://swapi.dev/api/vehicles/?page=4";
 
   const fetchVehicules = async () => {
-    if (boolVehicules) return
     const response1 = await fetch(vehiculeUrl1);
     const data1 = await response1.json();
     const data11 = data1.results
@@ -79,7 +84,6 @@ function App() {
   }
 
   const fetchMovieUrl = async () => {
-    if (boolMovies) return
     const response = await fetch(moviesUrl);
     const movieUrls = await response.json();
     const data = movieUrls.results
@@ -90,7 +94,6 @@ function App() {
   }
 
   const fetchResidents = async () => {
-    if (boolPeople) return
     const response1 = await fetch(url1);
     const data1 = await response1.json();
     const data11 = data1.results
@@ -136,7 +139,8 @@ function App() {
       setData7(data17);
       setData8(data18);
       setData9(data19);
-      setBoolPeople(true);
+      localStorage.setItem('people', [data11, data12, data13, data14, data15, data16, data17, data18, data19]);
+      //setBoolPeople(true);
     } catch(err){ console.error(err)}
   };
 
@@ -152,10 +156,13 @@ function App() {
   let movieList = [];
   let vehiculeList = [];
 
+
+
   
-  if (boolMovies && boolPeople && boolVehicules) {
+  if (boolMovies && boolVehicules) {
     movies.forEach((movie) => movieList.push(movie.title));
-    console.log("App::movies => ", movies);
+    //console.log("App::movies => ", movies);
+
     data1.forEach((movie) => residentList.push(movie.name));
     data2.forEach((movie) => residentList.push(movie.name));
     data3.forEach((movie) => residentList.push(movie.name));
@@ -171,6 +178,10 @@ function App() {
     vehicles3.forEach((vehicle) => vehiculeList.push(vehicle.name));
     vehicles4.forEach((vehicle) => vehiculeList.push(vehicle.name));
     
+   console.log( "App::residentList => " ,residentList) 
+   console.log( "App::movieList => " ,movieList)  
+   console.log( "App::vehiculeList => " ,vehiculeList) 
+
   return (
     <div className="App">
       <Navbar />
@@ -208,6 +219,10 @@ function App() {
         <Route
           path="/vehicles"
           element={<Vehicules residentArray={residentList} />}
+        />
+        <Route
+          path="/vehicule/:id"
+          element={<Vehicule vehiculeList={vehiculeList}/>}
         />
         <Route
           path="/starships"

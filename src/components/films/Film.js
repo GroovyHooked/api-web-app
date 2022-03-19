@@ -25,6 +25,7 @@ export const Film = ({residentArray}) => {
     fetchMovieData()
   }, []);
 
+
   if (isLoaded) {
     //console.log(fetchData);
     return (
