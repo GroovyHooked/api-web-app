@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export const Vehicules = ({ residentArray }) => {
+export const Vehicles = ({ residentArray }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -24,22 +24,22 @@ export const Vehicules = ({ residentArray }) => {
       return (
         <div key={i} className="thumbnail">
           <h4>{res.name}</h4>
-          <p>episode_id: {res.manufacturer}</p>
-          <p>opening_crawl: {res.model}</p>
-          <p>director: {res.director}</p>
-          <p>producer: {res.passengers}</p>
+          <p>manufacturer: {res.manufacturer}</p>
+          <p>model: {res.model}</p>
+          <p>cargo_capacity: {res.cargo_capacity}</p>
+          <p>passengers: {res.passengers}</p>
           <div>
             <h5>pilots:</h5>
             <ul>
-              {res.pilots.map((pilot, i) => {
+              {res.pilot !== [] ? res.pilots.map((pilot, i) => {
                 let splitUrl = pilot.split("/");
                 let id = splitUrl[splitUrl.length - 2];
                 return (
                   <li key={i}>
-                    <a href={"/resident/" + id}>{residentArray[id - 1]}∑</a>
+                    <a href={"/resident/" + id}>{residentArray[id - 1]}</a>
                   </li>
                 );
-              })}
+              }): ("<p>No pilots</p>")}
             </ul>
           </div>
         </div>
@@ -49,7 +49,7 @@ export const Vehicules = ({ residentArray }) => {
   if (isLoaded) {
     return (
       <>
-        <h3>Vehicules</h3>
+        <h3>Vehicles</h3>
         <div className="container">
           <VehiculesComp />
         </div>

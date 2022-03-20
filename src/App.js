@@ -11,10 +11,10 @@ import { Species } from "./components/species/Species";
 import { Planet } from "./components/planets/Planet";
 import { Test } from "./components/Test";
 import { Pokemons } from "./components/Pokemons";
-import { Vehicules } from "./components/vehicule/Vehicules";
+import { Vehicles } from "./components/vehicle/Vehicles";
 import { Film } from "./components/films/Film";
 import { Starships } from "./components/starship/Starships";
-import { Vehicule } from "./components/vehicule/Vehicule"
+import { Vehicle } from "./components/vehicle/Vehicle"
 
 import "./App.css";
 
@@ -23,7 +23,7 @@ function App() {
   const state = useSelector((state) => state);
   console.log("state => ", state)
 
-//if(state.resident.movies > 0) {  
+if(state.movies !== [] && state.vehicles !== [] && state.resident !== []) {  
   return (
     <div className="App">
       <Navbar />
@@ -60,11 +60,11 @@ function App() {
         <Route path="/pokemon" element={<Pokemons />} />
         <Route
           path="/vehicles"
-          element={<Vehicules residentArray={state.resident} />}
+          element={<Vehicles residentArray={state.resident} />}
         />
         <Route
           path="/vehicule/:id"
-          element={<Vehicule vehiculeList={state.vehicles}/>}
+          element={<Vehicle vehiculeList={state.vehicles}/>}
         />
         <Route
           path="/starships"
@@ -73,9 +73,9 @@ function App() {
       </Routes>
     </div>
   ); 
-  // } else {
-  //   return <div>Waiting...</div>;
-  // }
+   } else {
+     return <div>Waiting...</div>;
+   }
 }
 
 export default App;
