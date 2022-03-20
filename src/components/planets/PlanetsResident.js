@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 export const PlanetsResident = ({ movieList, vehiculeList }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-
+console.log("vehiculeList => ", vehiculeList)
   const fetchResident = async () => {
     const residents = "https://swapi.dev/api/people/";
 
@@ -60,16 +60,16 @@ console.log("PlanetsResident::fetchData.vehicles => ", fetchData.vehicles)
               <h5>Véhicules:</h5>
 
               <ul>
-                {fetchData.vehicles.map((vehicle, i) => { 
+                {fetchData?.vehicles.map((vehicle, i) => { 
                    let splitUrl2 = vehicle.split("/");
                    let id = splitUrl2[splitUrl2.length - 2];
                      return (
                       <li key={i}>
-                         <a href={"/vehicule/" + id}>{vehiculeList[id]}</a>
+                         <a href={"/vehicule/" + id}>{vehiculeList}</a>
                       </li>
                      )
                 })
-                 }
+              }
               </ul>
             </div>
           </>
