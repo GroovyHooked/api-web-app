@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../assets/styles/Reset.css";
 import "../../assets/styles/People.css";
 
-export const People = ({ movieList }) => {
+export const People = ({ movieList, residentArray }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
   console.log("People::movieList => ", movieList);
@@ -22,6 +22,8 @@ export const People = ({ movieList }) => {
     fetchPeople()
   }, []);
 
+  console.log("People::fetchData => ", fetchData)
+  console.log("People::movieList => ", movieList)
   const MyPeeps = () => {
     return fetchData.results.map((res, i) => {
       return (
@@ -40,7 +42,7 @@ export const People = ({ movieList }) => {
                 //console.log("id => ", id);
                 return (
                   <li key={i}>
-                    <a href={"/film/" + id}>{movieList[id - 1]}</a>
+                    <a href={"/film/" + id}>{movieList ? movieList[id]?.title : null}</a>
                   </li>
                 );
               })}

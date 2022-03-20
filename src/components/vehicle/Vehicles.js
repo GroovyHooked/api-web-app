@@ -5,7 +5,7 @@ export const Vehicles = ({ residentArray }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   const url = "https://swapi.dev/api/vehicles/";
-
+  console.log("Vehicules::residentArray => ", residentArray);
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
@@ -21,6 +21,7 @@ export const Vehicles = ({ residentArray }) => {
 
   const VehiculesComp = () => {
     return fetchData.results.map((res, i) => {
+      console.log(res.pilots.length)
       return (
         <div key={i} className="thumbnail">
           <h4>{res.name}</h4>
@@ -31,7 +32,7 @@ export const Vehicles = ({ residentArray }) => {
           <div>
             <h5>pilots:</h5>
             <ul>
-              {res.pilot !== [] ? res.pilots.map((pilot, i) => {
+              {res.pilots.length > 0 ? res.pilots.map((pilot, i) => {
                 let splitUrl = pilot.split("/");
                 let id = splitUrl[splitUrl.length - 2];
                 return (
@@ -39,7 +40,7 @@ export const Vehicles = ({ residentArray }) => {
                     <a href={"/resident/" + id}>{residentArray[id - 1]}</a>
                   </li>
                 );
-              }): ("<p>No pilots</p>")}
+              }): <h3>Aucun pilote</h3>}
             </ul>
           </div>
         </div>

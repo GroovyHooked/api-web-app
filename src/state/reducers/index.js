@@ -5,7 +5,7 @@ import reducer3  from './movies.reducer'
 
 const reducers = combineReducers({
     resident: reducer1,
-    wehicles: reducer2,
+    vehicles: reducer2,
     movies: reducer3
 })
 

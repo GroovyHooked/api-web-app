@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-export const Planets = ({ residentArray }) => {
+export const Planets = ({ residentArray, refreshResidents }) => {
   const [fetchData, setFetchData] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-  console.log("Planets::residentArrayProp => ", residentArray);
+  console.log("Planets::residentArrayProp => ", residentArray.length);
   const url = "https://swapi.dev/api/planets/";
 
   const fetchPlanetData = async () => {
@@ -12,7 +12,6 @@ export const Planets = ({ residentArray }) => {
     try {
       setFetchData(data.results);
       setIsLoaded(true);
-      console.log("Planets::res.results => ",data.results);
     }
     catch (error) {
       console.error(error);
@@ -35,7 +34,7 @@ const Planets = () => {
           <h5>Résidents:</h5>
           {
             <ul>
-              {planet.residents.map((res, i) => {
+              {planet.residents.length > 0 ? planet.residents.map((res, i) => {
                 let splitUrl = res.split("/");
                 let id = splitUrl[splitUrl.length - 2];
                 return (
@@ -43,7 +42,7 @@ const Planets = () => {
                     <a href={"/resident/" + id}>{residentArray[id - 1]}</a>
                   </li>
                 );
-              })}
+              }) : <h3>Auncun résident</h3>}
             </ul>
           }
         </div>
@@ -56,6 +55,7 @@ const Planets = () => {
     return (
       <>
         <h3>Planets</h3>
+        <button onClick={refreshResidents}>refresh</button>
         <div className="container">
           <Planets />
         </div>
